@@ -1,25 +1,25 @@
-import logo from './logo.svg';
+import {useContext} from 'react'
+import injectContext from '../src/store/appContext'
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle";
+import {BrowserRouter, Switch, Route} from 'react-router-dom'
 import './App.css';
+import Turnos from '../src/components/Turnos/turnos'
+import LoginUser from '../src/components/Login/LoginUser'
+import {Context} from '../src/store/appContext'
+import EditTurnos from '../src/components/Turnos/editTurnos'
 
 function App() {
+  const {store} = useContext(Context)
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+        <Switch>
+          <Route exact path="/" component={LoginUser} />
+          <Route exact path="/turnos" component={Turnos} />
+          <Route exact path="/editTurnos" component={EditTurnos} />
+        </Switch>
+    </BrowserRouter>
   );
 }
 
-export default App;
+export default injectContext(App);
